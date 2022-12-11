@@ -1,0 +1,51 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "VnetCidr": {
+            "type": "string"
+        },
+        "Subnet1Cidr": {
+            "type": "string"
+        },
+        "Subnet2Cidr": {
+            "type": "string"
+        }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+            "name": "myvnet",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-11-01",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "Env": "nprd",
+                "Subscription": "Development"
+            },
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('VnetCidr')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "myvnet-subnet1",
+                        "properties": {
+                            "addressPrefix": "[parameters('Subnet1Cidr')]"
+                        }
+                    },
+                    {
+                        "name": "myvnet-subnet2",
+                        "properties": {
+                            "addressPrefix": "[parameters('Subnet2Cidr')]"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "outputs": {}
+}
