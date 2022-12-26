@@ -17,3 +17,31 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
+- task: TerraformInstaller@0
+  inputs:
+    terraformVersion: 'latest'
+- task: TerraformTaskV3@3
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    commandOptions: 'init'
+    backendServiceArm: 'Free Trial(71c53708-e6f7-4280-a395-e01f69930a42)'
+    backendAzureRmResourceGroupName: 'myrsg'
+    backendAzureRmStorageAccountName: 'mystorage683i9'
+    backendAzureRmContainerName: 'tfstorage'
+    backendAzureRmKey: 'dev.terraform.tfstate'
+- task: TerraformTaskV3@3
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+- task: TerraformTaskV3@3
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    backendServiceArm: 'Free Trial(71c53708-e6f7-4280-a395-e01f69930a42)'
+- task: TerraformTaskV3@3
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    backendServiceArm: 'Free Trial(71c53708-e6f7-4280-a395-e01f69930a42)'
