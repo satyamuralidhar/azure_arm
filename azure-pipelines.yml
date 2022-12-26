@@ -31,16 +31,16 @@ steps:
     backendAzureRmStorageAccountName: 'mystorage683i9'
     backendAzureRmContainerName: 'tfstorage'
     backendAzureRmKey: 'dev.terraform.tfstate'
-- task: TerraformTaskV3@3
+- task: TerraformTaskV1@0
   inputs:
     provider: 'azurerm'
     command: 'validate'
-- task: TerraformTaskV3@3
+- task: TerraformTaskV1@1
   inputs:
     provider: 'azurerm'
     command: 'plan'
     backendServiceArm: 'Free Trial(71c53708-e6f7-4280-a395-e01f69930a42)'
-- task: TerraformTaskV3@3
+- task: TerraformTaskV1@2
   inputs:
     provider: 'azurerm'
     command: 'apply'
